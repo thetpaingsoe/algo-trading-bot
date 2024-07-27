@@ -188,7 +188,7 @@ class BinanceFutures():
                 'reduceOnly': reduce,
             }
             amount = self.amount_to_precision(symbol, amount)
-            return self.session.create_order(symbol, 'market', side, amount, params=params)
+            return self.session.create_order(symbol, 'MARKET', side, amount, params=params)
 
         except Exception as e:
             raise Exception(f"Failed to place market order of {amount} {symbol}: {e}")
@@ -200,7 +200,7 @@ class BinanceFutures():
             }
             amount = self.amount_to_precision(symbol, amount)
             price = self.price_to_precision(symbol, price)
-            return self.session.create_order(symbol, 'limit', side, amount, price, params=params)
+            return self.session.create_order(symbol, 'LIMIT', side, amount, price, params=params)
 
         except Exception as e:
             raise Exception(f"Failed to place limit order of {amount} {symbol} at price {price}: {e}")
@@ -213,7 +213,7 @@ class BinanceFutures():
                 'reduceOnly': reduce,
                 'triggerPrice': trigger_price,
             }
-            return self.session.create_order(symbol, 'market', side, amount, params=params)
+            return self.session.create_order(symbol, 'MARKET', side, amount, params=params)
         except Exception as err:
             if print_error:
                 print(err)
@@ -230,7 +230,7 @@ class BinanceFutures():
                 'reduceOnly': reduce,
                 'triggerPrice': trigger_price,
             }
-            return self.session.create_order(symbol, 'limit', side, amount, price, params=params)
+            return self.session.create_order(symbol, 'LIMIT', side, amount, price, params=params)
         except Exception as err:
             if print_error:
                 print(err)
