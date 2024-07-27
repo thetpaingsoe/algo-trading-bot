@@ -1,12 +1,12 @@
-# LiveTradingBots
+# Algo-Trading-Bot
 
 _A homemade humble library to run automated python crypto trading bots_
 
 \
 🛠️ Setup commands (virtual environment included)
 -------------
-> git clone https://github.com/RobotTraders/LiveTradingBots.git \
-> bash LiveTradingBots/install.sh
+> git clone https://github.com/RobotTraders/Algo-Trading-Bot.git \
+> bash Algo-Trading-Bot/install.sh
 
 
 \
@@ -20,7 +20,7 @@ _A homemade humble library to run automated python crypto trading bots_
 -------------
 Python >= 3.12 
 \
-See [requirements.txt](https://github.com/RobotTraders/LiveTradingBots/blob/main/requirements.txt) for the specific Python packages
+See [requirements.txt](https://github.com/RobotTraders/Algo-Trading-Bot/blob/main/requirements.txt) for the specific Python packages
 
 
 \
