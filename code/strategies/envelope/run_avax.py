@@ -90,7 +90,7 @@ for i, e in enumerate(params['envelopes']):
 print(f"{datetime.now().strftime('%H:%M:%S')}: ohlcv data fetched")
 
 
-# --- CHECKS IF STOP LOSS WAS TRIGGERED ---
+# --- CHECKS IF STOP LOSS WAS TRIGGERED --- 
 closed_orders = binance.fetch_closed_trigger_orders(params['symbol'])
 tracker_info = read_tracker_file(tracker_file)
 if len(closed_orders) > 0 and closed_orders[-1]['id'] in tracker_info['stop_loss_ids']:
@@ -123,7 +123,7 @@ if open_position:
 # --- CHECKS IF CLOSE ALL SHOULD TRIGGER ---
 if 'price_jump_pct' in params and open_position:
     if position['side'] == 'long':
-        if data['close'].iloc[-1] < float(position['info']['openPriceAvg']) * (1 - params['price_jump_pct']):
+        if data['close'].iloc[-1] < float(position['info']['entryPrice']) * (1 - params['price_jump_pct']):
             binance.flash_close_position(params['symbol'])
             update_tracker_file(tracker_file, {
                 "last_side": "long",
@@ -133,7 +133,7 @@ if 'price_jump_pct' in params and open_position:
             print(f"{datetime.now().strftime('%H:%M:%S')}: /!\\ close all was triggered")
 
     elif position['side'] == 'short':
-        if data['close'].iloc[-1] > float(position['info']['openPriceAvg']) * (1 + params['price_jump_pct']):
+        if data['close'].iloc[-1] > float(position['info']['entryPrice']) * (1 + params['price_jump_pct']):
             binance.flash_close_position(params['symbol'])
             update_tracker_file(tracker_file, {
                 "last_side": "short",
@@ -168,10 +168,10 @@ if not open_position:
 if open_position:
     if position['side'] == 'long':
         close_side = 'sell'
-        stop_loss_price = float(position['info']['openPriceAvg']) * (1 - params['stop_loss_pct'])
+        stop_loss_price = float(position['info']['entryPrice']) * (1 - params['stop_loss_pct'])
     elif position['side'] == 'short':
         close_side = 'buy'
-        stop_loss_price = float(position['info']['openPriceAvg']) * (1 + params['stop_loss_pct'])
+        stop_loss_price = float(position['info']['entryPrice']) * (1 + params['stop_loss_pct'])
 
     amount = position['contracts'] * position['contractSize']
     # exit
